@@ -155,6 +155,8 @@ interface Creep extends AttackableEntity {
     repair(target: RepairableEntity): GameCode;
 
     transferEnergy(target: AttackableEntity, amount?: number): GameCode;
+
+    suicide(): GameCode;
 }
 
 interface PositionEntity { }
@@ -228,6 +230,14 @@ interface Room {
     findPath(fromPos: RoomPosition, toPos: RoomPosition, opts?: PathfindingOptions): FindStep[];
 
     makeSnapshot(description?: string): void;
+
+    /** On success getPositionAt will return RoomPosition; on failure, GameCode. */
+    getPositionAt(x: number, y: number): any;
+
+    createFlag(x: number, y: number, name?: string): GameCode;
+    createFlag(pos: PositionEntity, name?: string): GameCode;
+    createConstructionSite(x: number, y: number, structureType: string): GameCode;
+    createConstructionSite(pos: PositionEntity, structureType: string): GameCode;
 }
 
 interface Flag {
@@ -236,6 +246,8 @@ interface Flag {
     roomName: string;
     room: Room;
     pos: RoomPosition;
+
+    remove(): GameCode;
 }
 
 interface ConstructionSite extends PositionEntity {
@@ -247,6 +259,8 @@ interface ConstructionSite extends PositionEntity {
     progressTotal: number;
     StructureTypes: string;
     my: boolean;
+
+    remove(): GameCode;
 }
 
 interface Source extends PositionEntity {
@@ -278,6 +292,9 @@ declare var Game: {
     flags: { [name: string]: Flag };
     spawns: { [name: string]: Spawn };
     structures: { [name: string]: Structure };
+
+    getRoom(name: string): Room;
+    getObjectById(id: string): any;
 
     /** System game tick counter. It is automatically incremented on every tick. */
     time: number;

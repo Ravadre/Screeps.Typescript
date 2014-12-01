@@ -2,7 +2,8 @@
     Spawn: "spawn",
     Extension: "extension",
     Wall: "wall",
-    Rampart: "rampart"
+    Rampart: "rampart",
+    Road: "road"
 };
 var Body = {
     Move: "move",
