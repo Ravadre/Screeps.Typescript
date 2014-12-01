@@ -231,8 +231,8 @@ interface Room {
 
     makeSnapshot(description?: string): void;
 
-    /** On success getPositionAt will return RoomPosition; on failure, GameCode. */
-    getPositionAt(x: number, y: number): any;
+    /** On success getPositionAt will return RoomPosition; on failure, null. */
+    getPositionAt(x: number, y: number): RoomPosition;
 
     createFlag(x: number, y: number, name?: string): GameCode;
     createFlag(pos: PositionEntity, name?: string): GameCode;
